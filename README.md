@@ -76,7 +76,7 @@ sh run_projection.sh
 cd face_keypoints
 python extract_project_npy.py   # Extract StyleGAN feature maps
 ```
-- Converts the latent codes extracted in Step 2.1 (**projected/seed*/projected_w.npz**) into `features.npy`.
+- Converts the latent codes extracted in Step 2.1 (**projected/seed*/projected_w.npz**) into `latent_ffhq.npy`.
 
 ### STEP 2.3
 ```bash
@@ -137,5 +137,11 @@ We would like to thank the authors of DatasetGAN for their pioneering contributi
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
   pages={10145--10155},
   year={2021}
+}
+@inproceedings{Karras2020ada,
+  title     = {Training Generative Adversarial Networks with Limited Data},
+  author    = {Tero Karras and Miika Aittala and Janne Hellsten and Samuli Laine and Jaakko Lehtinen and Timo Aila},
+  booktitle = {Proc. NeurIPS},
+  year      = {2020}
 }
 ```
