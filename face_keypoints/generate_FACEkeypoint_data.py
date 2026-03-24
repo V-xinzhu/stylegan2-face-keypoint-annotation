@@ -57,8 +57,13 @@ def prepare_keypoint_data(featuresmap=True,keypoints=True):
         features_list = []
         
         for i, w in enumerate(latents):
-            ws = torch.from_numpy(w).float().to(device).unsqueeze(0)  # (1, 18, 512)
+            # ws = torch.from_numpy(w).float().to(device).unsqueeze(0)  # (1, 18, 512)
+            ws = torch.from_numpy(w).float().to(device)
+            # 自动修正 shape
+            if ws.ndim == 4 and ws.shape[1] == 1:
+                ws = ws.squeeze(1)
             
+            print(ws.shape)
             # Hook to collect feature maps
             features = []
             hooks = []
@@ -167,4 +172,4 @@ def prepare_keypoint_data(featuresmap=True,keypoints=True):
         print(f'Saved keypoints: {keypoints_array.shape}')
 
 if __name__ == '__main__':
-    prepare_keypoint_data(featuresmap=True,keypoints=True)
+    prepare_keypoint_data(featuresmap=False,keypoints=True)
