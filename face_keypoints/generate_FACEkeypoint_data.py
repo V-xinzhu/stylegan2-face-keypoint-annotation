@@ -167,4 +167,4 @@ def prepare_keypoint_data(featuresmap=True,keypoints=True):
         print(f'Saved keypoints: {keypoints_array.shape}')
 
 if __name__ == '__main__':
-    prepare_keypoint_data(featuresmap=False,keypoints=True)
+    prepare_keypoint_data(featuresmap=True,keypoints=True)
