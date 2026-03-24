@@ -83,7 +83,7 @@ python extract_project_npy.py   # Extract StyleGAN feature maps
 cd face_keypoints
 python generate_FACEkeypoint_data.py   # Extract StyleGAN feature maps
 ```
-- Processes the `*.json` files from `datasetgan_keypoint\face_keypoint_annotation\keypoints_annotation\` into `keypoints.npy`.
+- Processes the `*.json` files from `datasetgan_keypoint\face_keypoint_annotation\keypoints_annotation\` into `keypoints.npy` and `features.npy`.
 
 ### STEP 2.4
 ```bash
