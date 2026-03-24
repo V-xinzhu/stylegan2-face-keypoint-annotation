@@ -11,8 +11,12 @@
 ## └─face_keypoint_annotation
     16 randomly generated face images from StyleGAN2 ffhq.pkl
 
-![image](face_keypoint_annotation/251.png)| ![image](face_keypoint_annotation/439.png)
+### Annotation Examples
 
+<div align="center">
+  <img src="./face_keypoint_annotation/251.png" width="45%" alt="Annotation 1">
+  <img src="./face_keypoint_annotation/439.png" width="45%" alt="Annotation 2">
+</div>
 
 ### └─keypoints_annotation
     Contains keypoint annotation data (*.json) for the 16 face images, all labeled using LabelMe software.
@@ -101,13 +105,14 @@ python train_keypoint_heatmap.py --features features.npy --keypoints heatmaps.np
 python inference.py --mode random --num_samples 4 --seed 42 --output_dir ./random_results
 ```
 - --num_samples: Specifies the number of generated data samples
+### Random Generation Results (with predicted keypoints)
 
-![result1](img/random_seed42_sample052_keypoints.png "Optional title")
-![result2](img/random_seed42_sample073_keypoints.png "Optional title")
-![result3](img/random_seed42_sample089_keypoints.png "Optional title")
-![result4](img/random_seed42_sample099_keypoints.png "Optional title")
-
-
+<div align="center">
+  <img src="./img/random_seed42_sample052_keypoints.png" width="23%" alt="Sample 1">
+  <img src="./img/random_seed42_sample073_keypoints.png" width="23%" alt="Sample 2">
+  <img src="./img/random_seed42_sample089_keypoints.png" width="23%" alt="Sample 3">
+  <img src="./img/random_seed42_sample099_keypoints.png" width="23%" alt="Sample 4">
+</div>
 # Model Architecture (Inspired by [DatasetGAN](https://arxiv.org/pdf/2104.06490))
 
 - Input: 5568-dimensional feature vector (intermediate features from StyleGAN)
