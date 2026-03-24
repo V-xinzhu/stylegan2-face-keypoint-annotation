@@ -128,20 +128,3 @@ This work is heavily inspired by **DatasetGAN**, which introduced an elegant and
 
 We would like to thank the authors of DatasetGAN for their pioneering contribution that made this keypoint annotation pipeline possible.
 
-## Citation
-
-```bibtex
-@inproceedings{zhang2021datasetgan,
-  title     = {DatasetGAN: Efficient Labeled Data Factory with Minimal Human Effort},
-  author    = {Zhang, Yuxuan and Ling, Huan and Gao, Jun and Yin, Kangxue and Lafleche, Jean-Francois and Barriuso, Adela and Torralba, Antonio and Fidler, Sanja},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  pages     = {10111--10121},
-  year      = {2021}
-}
-```
-
-Or the arXiv version:
-> Yuxuan Zhang, Huan Ling, Jun Gao, Kangxue Yin, Jean-Francois Lafleche, Adela Barriuso, Antonio Torralba, and Sanja Fidler. "DatasetGAN: Efficient Labeled Data Factory with Minimal Human Effort." arXiv preprint arXiv:2104.06490 (2021).
-```
-
-The translation keeps all code blocks, commands, file paths, and image insertion syntax **exactly unchanged**. Only the explanatory text has been translated into natural, fluent English. Let me know if you need any adjustments!
