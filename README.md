@@ -11,7 +11,7 @@
 ## └─face_keypoint_annotation
     16 randomly generated face images from StyleGAN2 ffhq.pkl
 
-![image](face_keypoint_annotation\251.png)| ![image](face_keypoint_annotation\439.png)
+![image](face_keypoint_annotation/251.png)| ![image](face_keypoint_annotation/439.png)
 
 
 ### └─keypoints_annotation
@@ -102,10 +102,10 @@ python inference.py --mode random --num_samples 4 --seed 42 --output_dir ./rando
 ```
 - --num_samples: Specifies the number of generated data samples
 
-![result1](img\random_seed42_sample052_keypoints.png "Optional title")
-![result2](img\random_seed42_sample073_keypoints.png "Optional title")
-![result3](img\random_seed42_sample089_keypoints.png "Optional title")
-![result4](img\random_seed42_sample099_keypoints.png "Optional title")
+![result1](img/random_seed42_sample052_keypoints.png "Optional title")
+![result2](img/random_seed42_sample073_keypoints.png "Optional title")
+![result3](img/random_seed42_sample089_keypoints.png "Optional title")
+![result4](img/random_seed42_sample099_keypoints.png "Optional title")
 
 
 # Model Architecture (Inspired by [DatasetGAN](https://arxiv.org/pdf/2104.06490))
