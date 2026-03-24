@@ -113,6 +113,7 @@ python inference.py --mode random --num_samples 4 --seed 42 --output_dir ./rando
   <img src="./img/random_seed42_sample089_keypoints.png" width="23%" alt="Sample 3">
   <img src="./img/random_seed42_sample099_keypoints.png" width="23%" alt="Sample 4">
 </div>
+
 # Model Architecture (Inspired by [DatasetGAN](https://arxiv.org/pdf/2104.06490))
 
 - Input: 5568-dimensional feature vector (intermediate features from StyleGAN)
