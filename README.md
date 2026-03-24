@@ -11,7 +11,7 @@
 ## └─face_keypoint_annotation
     16 randomly generated face images from StyleGAN2 ffhq.pkl
 
-![annotation1](face_keypoint_annotation\251.png "Optional title")| ![annotation2](face_keypoint_annotation\439.png "Optional title")
+![annotation1](.\face_keypoint_annotation\251.png "Optional title")| ![annotation2](.\face_keypoint_annotation\439.png "Optional title")
 
 
 ### └─keypoints_annotation
