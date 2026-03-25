@@ -97,7 +97,7 @@ python generate_heatmaps.py   # Extract StyleGAN feature maps
 python train_keypoint_heatmap.py --features features.npy --keypoints heatmaps.npy \
   --exp_dir ./exp_keypoint --epochs 100 --batch_size 2 --lr 0.001
 ```
-- This starts the training of our keypoint annotation model. Try to reduce the loss below \(10^{-3}\) (overfitting is acceptable here), which will greatly improve the stability of the generated annotation data.
+- This starts the training of our keypoint annotation model. Try to reduce the loss below 10<sup>-3</sup>) (overfitting is acceptable here), which will greatly improve the stability of the generated annotation data.
 
 
 
