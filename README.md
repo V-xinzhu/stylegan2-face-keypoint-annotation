@@ -42,7 +42,7 @@ For example:
 Clone the repository [StyleGAN2-ada-pytorch](https://github.com/NVlabs/stylegan2-ada-pytorch) and install the appropriate environment according to their tutorial.
 
 ### STEP 1.2
-Download the official StyleGAN2 weight: [ffhq.pkl](https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/ffhq.pkl) and place it in the root directory of the project.
+Download the official StyleGAN2 weight: [ffhq.pkl](https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/ffhq.pkl), or train your own model following the [StyleGAN2-ada-pytorch](https://github.com/NVlabs/stylegan2-ada-pytorch) tutorial and obtain your own weight file (e.g., xx.pkl). Place the weight file in the root directory of the project.
 
 ### STEP 2.1 
 
@@ -99,12 +99,73 @@ python train_keypoint_heatmap.py --features features.npy --keypoints heatmaps.np
 ```
 - This starts the training of our keypoint annotation model. Try to reduce the loss below \(10^{-3}\) (overfitting is acceptable here), which will greatly improve the stability of the generated annotation data.
 
-### STEP 4 
+
+
+### STEP 4: Automatic Keypoint Annotation
 
 ```bash
+
+cd face_keypoints
+
 python inference.py --mode random --num_samples 4 --seed 42 --output_dir ./random_results
+
 ```
 - --num_samples: Specifies the number of generated data samples
+
+Currently, `inference.py` only handles random generation from StyleGAN2.
+
+To extend it for **real images** (projected latents), make a small change to the script:
+
+#### Modification Steps (High-Level Pseudocode):
+
+```
+
+IF args.mode == "project":
+
+    INITIALIZE empty list for latents
+
+    FOR each .npz file in the projected_dir:
+
+        LOAD the latent vector (e.g., w or projected_w) FROM the file
+
+        APPEND the vector TO latents list
+
+    STACK all vectors INTO a batch
+
+    CONVERT the batch TO a tensor on the device
+
+ELSE:
+
+    GENERATE random latent vectors for the number of samples
+
+END IF
+
+# Proceed with the rest of inference: generate images from latents and predict keypoints
+
+```
+
+That's it — the rest of the inference loop (image generation + keypoint prediction) stays the same.
+
+After this change, the workflow for real images is:
+
+```bash
+
+# 1. Project real images to latent space (same as STEP 2.1)
+
+cd face_keypoints
+
+sh run_projection.sh   # Update INPUT_DIR to your real images folder
+
+# 2. Run auto annotation on projected results
+
+python inference.py --mode project --projected_dir ../face_keypoints/projected --output_dir ./real_annotation_results
+
+```
+
+This way you can project real data once, then auto-annotate as many as you want with minimal extra effort. Perfect for scaling datasets without tons of manual labeling.
+
+
+
 ### Random Generation Results (with predicted keypoints)
 
 <div align="center">
