@@ -14,8 +14,8 @@
 ### Annotation Examples
 
 <div align="center">
-  <img src="./face_keypoint_annotation/251.png" width="45%" alt="Annotation 1">
-  <img src="./face_keypoint_annotation/439.png" width="45%" alt="Annotation 2">
+  <img src="./img/annotation_samples01.png" width="45%" alt="Annotation 1">
+  <img src="./img/annotation_samples02.png" width="45%" alt="Annotation 2">
 </div>
 
 ### └─keypoints_annotation
