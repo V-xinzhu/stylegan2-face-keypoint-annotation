@@ -101,7 +101,7 @@ python train_keypoint_heatmap.py --features features.npy --keypoints heatmaps.np
 
 
 
-### STEP 4: Automatic Keypoint Annotation
+### STEP 4.1: Automatic Keypoint Annotation
 
 ```bash
 
@@ -111,61 +111,8 @@ python inference.py --mode random --num_samples 4 --seed 42 --output_dir ./rando
 
 ```
 - --num_samples: Specifies the number of generated data samples
-
-Currently, `inference.py` only handles random generation from StyleGAN2.
-
-To extend it for **real images** (projected latents), make a small change to the script:
-
-#### Modification Steps (High-Level Pseudocode):
-
-```
-
-IF args.mode == "project":
-
-    INITIALIZE empty list for latents
-
-    FOR each .npz file in the projected_dir:
-
-        LOAD the latent vector (e.g., w or projected_w) FROM the file
-
-        APPEND the vector TO latents list
-
-    STACK all vectors INTO a batch
-
-    CONVERT the batch TO a tensor on the device
-
-ELSE:
-
-    GENERATE random latent vectors for the number of samples
-
-END IF
-
-# Proceed with the rest of inference: generate images from latents and predict keypoints
-
-```
-
-That's it — the rest of the inference loop (image generation + keypoint prediction) stays the same.
-
-After this change, the workflow for real images is:
-
-```bash
-
-# 1. Project real images to latent space (same as STEP 2.1)
-
-cd face_keypoints
-
-sh run_projection.sh   # Update INPUT_DIR to your real images folder
-
-# 2. Run auto annotation on projected results
-
-python inference.py --mode project --projected_dir ../face_keypoints/projected --output_dir ./real_annotation_results
-
-```
-
-This way you can project real data once, then auto-annotate as many as you want with minimal extra effort. Perfect for scaling datasets without tons of manual labeling.
-
-
-
+- --mode : Set random or latent
+- 
 ### Random Generation Results (with predicted keypoints)
 
 <div align="center">
@@ -174,6 +121,55 @@ This way you can project real data once, then auto-annotate as many as you want 
   <img src="./img/random_seed42_sample089_keypoints.png" width="23%" alt="Sample 3">
   <img src="./img/random_seed42_sample099_keypoints.png" width="23%" alt="Sample 4">
 </div>
+
+### STEP 4.2 Supplement: Automatic Annotation of Real Data via Projection (Recommended for Labeling Remaining Datasets)
+
+
+StyleGAN2 randomly samples latent codes to generate completely new synthetic images, which are then automatically annotated with the 18 keypoints on the face by the HeatmapPredictor.
+
+In real annotation workflows, we **more often use `latent` mode** to process **real images**:
+
+1. First, project each real image into StyleGAN2’s W+ space (using the official projector) to obtain the corresponding `projected_w.npz` file.  
+
+2. Then run inference in `latent` mode so the HeatmapPredictor automatically annotates the keypoints on these projected real images.  
+
+This approach allows you to **efficiently label the remaining real dataset** with minimal manual effort while keeping high annotation quality.
+
+**Usage Examples:**
+
+```bash
+
+# 1. Annotate a single projected real image
+
+python inference.py --mode latent --latent_path ./projected/real_image_001/projected_w.npz --output_dir ./latent_results
+
+# 2. Batch-process an entire folder of projected images (recommended)
+
+python inference.py --mode latent --latent_dir ./projected --output_dir ./latent_results --save_heatmaps
+
+```
+
+**Key parameters for `latent` mode:**
+
+- `--latent_path`: path to a single `projected_w.npz` file
+
+- `--latent_dir`: folder containing multiple projected subfolders (the script will automatically find all `projected_w.npz` files)
+
+- `--save_heatmaps`: also save heatmap visualizations for quick quality checking
+
+**Output:**
+
+- PNG images with overlaid keypoints
+
+- `all_keypoints.npy` containing all predicted keypoint coordinates
+
+
+**Combining both modes gives you a complete pipeline:**
+
+- `random` mode → quickly generate large amounts of **diverse synthetic data** for augmentation  
+
+- `latent` mode → automatically annotate **remaining real images**  
+
 
 # Model Architecture (Inspired by [DatasetGAN](https://arxiv.org/pdf/2104.06490))
 
